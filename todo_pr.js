@@ -1,8 +1,3 @@
-const list = [
-              { name: 'create a post', status: 'In progress', priority: 'low'  },
-              { name: 'test', status: 'ToDo', priority: 'high'  }
-              ]
-
 const STATUS = {
     TODO: 'ToDo',
     IN_PROGRESS: 'In progress',
@@ -13,6 +8,11 @@ const PRIORITY = {
     LOW: 'low',
     HIGH: 'high'
 }
+
+const list = [
+    { name: 'create a post', status: STATUS.IN_PROGRESS, priority: PRIORITY.LOW  },
+    { name: 'test', status: STATUS.TODO, priority: PRIORITY.HIGH  }
+]
 
 function addTask(task){
     list.push({
