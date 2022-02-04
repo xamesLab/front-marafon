@@ -1,6 +1,6 @@
 const list = [
               { name: 'create a post', status: 'In progress', priority: 'low'  },
-              { name: 'test', status: 'Done', priority: 'high'  }
+              { name: 'test', status: 'ToDo', priority: 'high'  }
               ]
 
 const STATUS = {
@@ -22,6 +22,15 @@ function addTask(task){
     })
 }
 
+function deleteTask(task) {
+    for(let i=0; i<list.length; i++) {
+        if (list[i].name === task) {
+            list.splice(i, 1)
+            return
+        }
+    }
+}
+
 function changeStatus(task, status){
     list.forEach(i=>{
         if(i.name === task){
@@ -38,8 +47,20 @@ function changePriority(task, priority){
     })
 }
 
+function checkEmpty(displayMethod, resultObj){
+    const temp = {status:STATUS, priority:PRIORITY}
+    const keysArr = Object.values(temp[displayMethod])
+
+    for(let i of keysArr){
+        if(!(i in resultObj)){
+            resultObj[i] = ' -\n'
+        }
+    }
+    return resultObj
+}
+
 function showBy(displayMethod){
-    const result = {}
+    let result = {}
 
     for(let i of list){
         const displayKey = i[displayMethod]
@@ -51,6 +72,8 @@ function showBy(displayMethod){
         }
     }
 
+    result = checkEmpty(displayMethod, result)
+    //output
     for(let k in result){
         console.log(k)
         console.log(result[k])
@@ -60,9 +83,10 @@ function showBy(displayMethod){
 //tests
 addTask('push to git')
 addTask('add to chat')
-changeStatus('push to git', 'Done')
+changeStatus('push to git', 'In progress')
 changePriority('create a post', 'high')
 changePriority('test', 'low')
+deleteTask('create a post')
 
 //output
 showBy('priority')
