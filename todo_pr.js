@@ -9,6 +9,11 @@ const PRIORITY = {
     HIGH: 'high'
 }
 
+const DEFAULT = {
+    STATUS: STATUS.TODO,
+    PRIORITY: PRIORITY.HIGH
+}
+
 const list = [
     { name: 'create a post', status: STATUS.IN_PROGRESS, priority: PRIORITY.LOW  },
     { name: 'test', status: STATUS.TODO, priority: PRIORITY.HIGH  }
@@ -17,8 +22,8 @@ const list = [
 function addTask(task){
     list.push({
         name: task,
-        status: STATUS.TODO,
-        priority: PRIORITY.HIGH
+        status: DEFAULT.STATUS,
+        priority: DEFAULT.PRIORITY
     })
 }
 
