@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <title>ToDo</title>
+</head>
+<body>
+    <main class="container">
+        <div class="todo">
+            <div class="todo__title">
+                <h2>ToDo</h2>
+            </div>
+            <form class="todo__input">
+                <input type="text" class="todo__textarea">
+                <input type="submit" value="Добавить" class="todo__submit">
+            </form>
+            <div class="todo__content">
+            </div>
+        </div>
+    </main>
+</body>
+<script>
+    //
+    const STATUS = {
+        TODO: 'ToDo',
+        IN_PROGRESS: 'In progress',
+        DONE: 'Done'
+    }
+
+    const PRIORITY = {
+        LOW: 'low',
+        HIGH: 'high'
+    }
+
+    const DEFAULT = {
+        STATUS: STATUS.TODO,
+        PRIORITY: PRIORITY.HIGH
+    }
+
+    const list = JSON.parse(localStorage.getItem('todo'))||[
+        { name: 'добавить фильтрацию', status: STATUS.IN_PROGRESS, priority: PRIORITY.LOW  },
+    ]
+
+    function addTask(task){
+        list.push({
+            name: task,
+            status: DEFAULT.STATUS,
+            priority: DEFAULT.PRIORITY
+        })
+    }
+
+    function deleteTask(task) {
+        for(let i=0; i<list.length; i++) {
+            if (list[i].name === task) {
+                list.splice(i, 1)
+                return
+            }
+        }
+    }
+
+    function changeStatus(task, status){
+        list.forEach(i=>{
+            if(i.name === task){
+                i.status = status
+            }
+        })
+    }
+
+    function changePriority(task, priority){
+        list.forEach(i=>{
+            if(i.name === task){
+                i.priority = priority
+            }
+        })
+    }
+
+    // init
+    const text = document.querySelector('.todo__textarea')
+    const todoField = document.querySelector('.todo__content')
+    const submit = document.querySelector('.todo__submit')
+
+    // item template
+    let item = document.createElement('div')
+    item.className = "todo__item"
+    let hendle = document.createElement('div')
+    hendle.className = "todo__hendle"
+    hendle.insertAdjacentHTML("beforeend", '<div class="todo__btn_priority"></div>')
+    hendle.insertAdjacentHTML("beforeend", '<div class="todo__btn_status"></div>')
+    hendle.insertAdjacentHTML("beforeend", '<div class="todo__btn_del"></div>')
+    
+    submit.addEventListener('click', (e)=>{
+        e.preventDefault()
+        if(text.value !== ''){
+            addTask(text.value)
+            text.value = ''
+            render()
+        }
+    })
+
+    // rendering
+    const render = ()=>{
+        // clear old items
+        while (todoField.firstChild) {
+            todoField.firstChild.remove();
+        }
+
+        // render from list
+        for(let i of list){
+            const newItem = item.cloneNode(true)
+            const newHendle = hendle.cloneNode(true)
+            const priority =  newHendle.querySelector('.todo__btn_priority')
+            const status =  newHendle.querySelector('.todo__btn_status')
+
+            // styling
+            i.priority===PRIORITY.HIGH?priority.classList.add('high'):priority.classList.add('low')
+
+            if(i.status===STATUS.TODO){
+                status.classList.add('todo_st')
+            } else if (i.status===STATUS.DONE){
+                status.classList.add('done_st')
+            } else {
+                status.classList.add('in_progress_st')
+            }
+
+            priority.innerText = `${i.priority}`
+            newItem.insertAdjacentHTML("beforeend",`<p>${i.name}</p>`)
+            newItem.append(newHendle)
+            todoField.append(newItem)
+        }
+
+        // init new buttons
+        const statusBtnList = document.querySelectorAll('.todo__btn_status')
+        for(let i of statusBtnList){
+            i.addEventListener('click', (e)=>{
+                if(i.classList.contains('todo_st')){
+                    changeStatus(e.target.parentElement.parentElement.querySelector('p').innerText, 'In progress')
+                } else if (i.classList.contains('in_progress_st')){
+                    changeStatus(e.target.parentElement.parentElement.querySelector('p').innerText, 'Done')
+                }
+                render()
+            })
+        }
+
+        const priorityBtnList = document.querySelectorAll('.todo__btn_priority')
+        for(let i of priorityBtnList){
+            i.addEventListener('click', (e)=>{
+                if(i.classList.contains('low')){
+                    changePriority(e.target.parentElement.parentElement.querySelector('p').innerText, 'high')
+                } else if(i.classList.contains('high')){
+                    changePriority(e.target.parentElement.parentElement.querySelector('p').innerText, 'low')
+                }
+                render()
+            })
+        }
+
+        const delBtnList = document.querySelectorAll('.todo__btn_del')
+        for(let i of delBtnList){
+            i.addEventListener('click', (e)=>{
+                deleteTask(e.target.parentElement.parentElement.querySelector('p').innerText)
+                e.target.parentElement.parentElement.remove()
+                render()
+            })
+        }
+
+        // save to LS
+        localStorage.setItem('todo', JSON.stringify(list));
+    }
+
+    render()
+
+</script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+        background-color: #777;
+    }
+
+    .container {
+        width: 760px;
+        height: 100vh;
+        padding: 20% 2rem 0 2rem;
+        margin: auto;
+        background-color: rgb(235, 235, 235);
+    }
+
+    .todo {
+        width: 100%;
+    }
+
+    .todo__title {
+        padding: 0.5rem 1rem;
+    }
+
+    .todo__input {
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    .todo__textarea {
+        flex: 1 1 auto;
+        margin-right: 7px;
+        padding: 0.3rem 1rem;
+        border: 1px solid rgba(119, 119, 119, 0.75);
+        outline: none;
+    }
+
+    .todo__submit {
+        width: 100px;
+    }
+
+    .todo__item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid rgba(119, 119, 119, 0.5);
+        margin-top: 7px;
+        padding: 0.3rem 1rem;
+        cursor: pointer;
+    }
+
+    .todo__item:hover {
+        transform: scale(1.008);
+    }
+
+    .todo__hendle {
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .high {
+        color: rgb(201, 22, 22);
+        font-weight: 900;
+    }
+
+    .todo_st:before {
+        content: "\f251";
+        font-family: FontAwesome;
+        color: #681212;
+    }
+
+    .in_progress_st:before {
+        content: "\f252";
+        font-family: FontAwesome;
+        color: #c4a912;
+    }
+
+    .done_st:before {
+        content: "\f00c";
+        font-family: FontAwesome;
+        color: #2c800b;
+    }
+
+    .todo__btn_del::before {
+        content: "\f057";
+        font-family: FontAwesome;
+        color: #8d3e26;
+    }
+</style>
+</html>
