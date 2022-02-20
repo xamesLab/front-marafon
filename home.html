@@ -35,6 +35,14 @@
         HIGH: 'high'
     }
 
+    const CLASSLIST = {
+        LOW: 'low',
+        HIGH: 'high',
+        TODO: 'todo_st',
+        IN_PROGRESS: 'in_progress_st',
+        DONE: 'done_st'
+    }
+
     const DEFAULT = {
         STATUS: STATUS.TODO,
         PRIORITY: PRIORITY.HIGH
@@ -78,24 +86,28 @@
     }
 
     // init
-    const text = document.querySelector('.todo__textarea')
+    const textArea = document.querySelector('.todo__textarea')
     const todoField = document.querySelector('.todo__content')
     const submit = document.querySelector('.todo__submit')
 
     // item template
     let item = document.createElement('div')
     item.className = "todo__item"
+    let todoName = document.createElement('p')
     let hendle = document.createElement('div')
     hendle.className = "todo__hendle"
-    hendle.insertAdjacentHTML("beforeend", '<div class="todo__btn_priority"></div>')
-    hendle.insertAdjacentHTML("beforeend", '<div class="todo__btn_status"></div>')
-    hendle.insertAdjacentHTML("beforeend", '<div class="todo__btn_del"></div>')
+
+    hendle.insertAdjacentHTML("beforeend", '<div class="todo__btn_priority"></div><div class="todo__btn_status"></div><div class="todo__btn_del"></div>')
+
+    item.append(todoName)
+    item.append(hendle)
     
+    // submit event
     submit.addEventListener('click', (e)=>{
         e.preventDefault()
-        if(text.value !== ''){
-            addTask(text.value)
-            text.value = ''
+        if(textArea.value !== ''){
+            addTask(textArea.value)
+            textArea.value = ''
             render()
         }
     })
@@ -110,60 +122,67 @@
         // render from list
         for(let i of list){
             const newItem = item.cloneNode(true)
-            const newHendle = hendle.cloneNode(true)
-            const priority =  newHendle.querySelector('.todo__btn_priority')
-            const status =  newHendle.querySelector('.todo__btn_status')
+            const itemPriority =  newItem.querySelector('.todo__btn_priority')
+            const itemStatus =  newItem.querySelector('.todo__btn_status')
+            const itemName = newItem.querySelector('p')
 
             // styling
-            i.priority===PRIORITY.HIGH?priority.classList.add('high'):priority.classList.add('low')
+            if(i.priority===PRIORITY.HIGH){
+                itemPriority.classList.add(CLASSLIST.HIGH)
+            } else {
+                itemPriority.classList.add(CLASSLIST.LOW)
+            }
 
             if(i.status===STATUS.TODO){
-                status.classList.add('todo_st')
+                itemStatus.classList.add(CLASSLIST.TODO)
             } else if (i.status===STATUS.DONE){
-                status.classList.add('done_st')
+                itemStatus.classList.add(CLASSLIST.DONE)
             } else {
-                status.classList.add('in_progress_st')
+                itemStatus.classList.add(CLASSLIST.IN_PROGRESS)
             }
 
-            newItem.insertAdjacentHTML("beforeend",`<p>${i.name}</p>`)
+            itemName.innerText = i.name
             if(i.status===STATUS.DONE){
-               newItem.querySelector('p').style.textDecoration = 'line-through'
+                itemName.style.textDecoration = 'line-through'
             }
 
-            priority.innerText = `${i.priority}`
-            newItem.append(newHendle)
+            itemPriority.innerText = `${i.priority}`
             todoField.append(newItem)
+        }
+
+        const getParentItemName = (e)=>{
+            return e.target.parentElement.parentElement.querySelector('p').innerText
         }
 
         // init new buttons
         const statusBtnList = document.querySelectorAll('.todo__btn_status')
-        for(let i of statusBtnList){
-            i.addEventListener('click', (e)=>{
-                if(i.classList.contains('todo_st')){
-                    changeStatus(e.target.parentElement.parentElement.querySelector('p').innerText, 'In progress')
-                } else if (i.classList.contains('in_progress_st')){
-                    changeStatus(e.target.parentElement.parentElement.querySelector('p').innerText, 'Done')
+        for(let statusButton of statusBtnList){
+            statusButton.addEventListener('click', (e)=>{
+                if(statusButton.classList.contains(CLASSLIST.TODO)){
+                    changeStatus(getParentItemName(e), STATUS.IN_PROGRESS)
+                } else if (statusButton.classList.contains(CLASSLIST.IN_PROGRESS)){
+                    changeStatus(getParentItemName(e), STATUS.DONE)
                 }
                 render()
             })
         }
 
         const priorityBtnList = document.querySelectorAll('.todo__btn_priority')
-        for(let i of priorityBtnList){
-            i.addEventListener('click', (e)=>{
-                if(i.classList.contains('low')){
-                    changePriority(e.target.parentElement.parentElement.querySelector('p').innerText, 'high')
-                } else if(i.classList.contains('high')){
-                    changePriority(e.target.parentElement.parentElement.querySelector('p').innerText, 'low')
+        for(let priorityButton of priorityBtnList){
+            priorityButton.addEventListener('click', (e)=>{
+                if(priorityButton.classList.contains(CLASSLIST.LOW)){
+                    changePriority(getParentItemName(e), PRIORITY.HIGH)
+                } else if(priorityButton.classList.contains(CLASSLIST.HIGH)){
+                    changePriority(getParentItemName(e), PRIORITY.LOW)
                 }
                 render()
             })
         }
 
         const delBtnList = document.querySelectorAll('.todo__btn_del')
-        for(let i of delBtnList){
-            i.addEventListener('click', (e)=>{
-                deleteTask(e.target.parentElement.parentElement.querySelector('p').innerText)
+        for(let deleteButton of delBtnList){
+            deleteButton.addEventListener('click', (e)=>{
+                deleteTask(getParentItemName(e))
                 e.target.parentElement.parentElement.remove()
                 render()
             })
