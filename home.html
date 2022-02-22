@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>TodoV2</title>
+</head>
+<body>
+    <main class="container">
+        <section class="todo">
+            <div class="todo__title">high</div>
+            <form class="todo__input">
+                <input class="todo__text-area" type="text" placeholder="Добавить важных дел">
+                <input class="todo__submit_btn" type="submit" value="">
+            </form>
+            <div class="todo__content">
+                <div class="todo__item">
+                    <div class="todo__check"></div>
+                    <span class="todo__name">Вот вам и супер интересная тема. <br> Вы наверняка заметили что ваши файлы с кодом становятся все объемнее, что хочется вынести некоторые вещи куда-то за пределы основной программы.</span>
+                    <div class="todo__del"></div>
+                </div>
+                <div class="todo__item">
+                    <div class="todo__check"></div>
+                    <span class="todo__name">Сверстать этот TODO list</span>
+                    <div class="todo__del"></div>
+                </div>
+                <div class="todo__item done">
+                    <div class="todo__check"><div class="todo__check_inner"></div></div>
+                    <span class="todo__name">Начать делать задачу</span>
+                    <div class="todo__del"></div>
+                </div>
+            </div>
+        </section>
+        <section class="todo">
+            <div class="todo__title">low</div>
+            <form class="todo__input">
+                <input class="todo__text-area" type="text" placeholder="Добавить">
+                <input class="todo__submit_btn" type="submit" value="">
+            </form>
+            <div class="todo__content">
+                <div class="todo__item">
+                    <div class="todo__check"></div>
+                    <span class="todo__name">Посмотреть ютубчик</span>
+                    <div class="todo__del"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
