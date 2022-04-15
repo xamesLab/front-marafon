@@ -25,7 +25,6 @@
 
         // choice storage for get
         getStorage(){
-            console.log(this.name, this.storageType)
             if(this.storageType === 'session') return JSON.parse(sessionStorage.getItem(this.name))
             if(this.storageType === 'local') return JSON.parse(localStorage.getItem(this.name))
         }
