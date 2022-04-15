@@ -41,6 +41,13 @@
         </div>
     </div>
 </body>
+<script>
+    const btn = document.getElementsByClassName('calc__btn')
+    for(let el of btn)
+    {el.addEventListener('click', (e)=>{
+        console.log(e.currentTarget.textContent)
+    })}
+</script>
 <style>
     * {
         margin: 0;
