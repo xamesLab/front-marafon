@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <div class="header">
+            <div class="header__btn">
+                <span>Настройки</span>
+            </div>
+            <div class="header__btn">
+                <span>Войти</span>
+            </div>
+        </div>
+        <div class="message-field">
+            <div class="container">
+                <div class="message message_to message_d">
+                    <span><span>Я</span>: Добрый день!</span>
+                </div>
+                <div class="message message_from message_d">
+                    <span><span>Собеседник мой</span>: Добрый день!</span>
+                </div>
+                <div class="message message_from message_d">
+                    <span><span>Собеседник мой</span>: Второе сообщение, слишком длинное, чтобы поместиться в одной строке.</span>
+                </div>
+                <div class="message message_to message_s">
+                    <span><span>Я</span>: Досвидания!</span>
+                </div>
+            </div>
+        </div>
+        <form class="input" action="javascript:void(0);">
+            <input placeholder="сообщение..." type="text">
+            <input type="submit" value="->">
+        </form>
+    </main>
+</body>
+</html>
