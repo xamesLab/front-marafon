@@ -10,33 +10,44 @@
 <body>
     <main>
         <div class="header">
-            <div class="header__btn">
+            <div class="header__btn header__btn_set btn">
                 <span>Настройки</span>
             </div>
-            <div class="header__btn">
+            <div class="header__btn header__btn_gate btn">
                 <span>Войти</span>
             </div>
         </div>
         <div class="message-field">
             <div class="container">
-                <div class="message message_to message_d">
-                    <span><span>Я</span>: Добрый день!</span>
+                <template class="message_tmpl">
+                    
+                        <span><span class="message__author"></span>: <span class="message__text"></span></span>
+                    
+                </template>
+                <div class="message message_to">
+                    <span><span>I</span>: message gfgfgfgfg</span>
                 </div>
-                <div class="message message_from message_d">
-                    <span><span>Собеседник мой</span>: Добрый день!</span>
+                <div class="message message_from">
+                    <span><span>I</span>: message d  eeessdg</span>
                 </div>
-                <div class="message message_from message_d">
-                    <span><span>Собеседник мой</span>: Второе сообщение, слишком длинное, чтобы поместиться в одной строке.</span>
-                </div>
-                <div class="message message_to message_s">
-                    <span><span>Я</span>: Досвидания!</span>
+                <div class="message message_to">
+                    <span><span>I</span>: messagedgdgdgdgdggg</span>
                 </div>
             </div>
         </div>
         <form class="input" action="javascript:void(0);">
             <input placeholder="сообщение..." type="text">
-            <input type="submit" value="->">
+            <input type="submit" value="->" class="btn">
         </form>
     </main>
+    <div class="modal">
+        <div class="modal__content">
+            <div class="modal__header">
+                <span class="modal__title"></span>
+                <span class="modal__close">X</span>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./index.js"></script>
 </body>
 </html>
