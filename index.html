@@ -35,10 +35,17 @@
         </form>
     </main>
     <div class="modal">
-        <div class="modal__content">
+        <div class="modal__wrapper">
             <div class="modal__header">
                 <span class="modal__title"></span>
                 <span class="modal__close">X</span>
+            </div>
+            <div class="modal__content">
+                <label for="email">Почта:</label>
+                <form class="input-email" action="javascript:void(0);">
+                    <input name="email" placeholder="email" type="text" class="input__email">
+                    <input type="submit" value="Получить код" class="input__btn btn">
+                </form>
             </div>
         </div>
     </div>

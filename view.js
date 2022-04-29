@@ -1,6 +1,8 @@
 const MODAL = {
-    wrapper: document.querySelector(".modal"),
-    content: document.querySelector(".modal__content"),
+    modal: document.querySelector(".modal"),
+    wrapper: document.querySelector(".modal__wrapper"),
+    title: document.querySelector('.modal__title'),
+    content: document.querySelector('.modal__content')
 };
 
 const BUTTONS = {
@@ -12,7 +14,7 @@ const BUTTONS = {
 const MESSAGE = {
     template: document.querySelector(".message_tmpl"),
     container: document.querySelector(".container"),
-    scrollBox: document.querySelector(".message-field"),
+    scrollBox: document.querySelector(".message-field")
 };
 
 const FORM = {

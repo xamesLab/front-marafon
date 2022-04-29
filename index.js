@@ -1,48 +1,66 @@
 import { MODAL, BUTTONS, MESSAGE, FORM } from "./view.js";
-import state from "./storage.js";
+import storage from "./storage.js";
 import { initTimer } from "./timer.js";
+import {settingsContent, loginContent, confirmContent} from "./popupContent.js"
+
+const removeModal = ()=>{
+    MODAL.modal.style.display = "none";
+    MODAL.title.innerText = ''
+    MODAL.content.innerHTML = ''
+}
+
+const openModal = ()=>{
+    MODAL.modal.style.display = "flex";
+}
 
 (function init() {
     initTimer();
+    removeModal()
 
-    MODAL.wrapper.addEventListener("click", (e) => {
+    MODAL.modal.addEventListener("click", (e) => {
         e.stopPropagation();
-        MODAL.wrapper.style.display = "none";
+        removeModal()
     });
 
-    MODAL.content.addEventListener("click", (e) => {
+    MODAL.wrapper.addEventListener("click", (e) => {
         e.stopPropagation();
     });
 
     BUTTONS.closeModal.addEventListener("click", (e) => {
-        MODAL.wrapper.style.display = "none";
+        removeModal()
     });
 
     BUTTONS.loginUnlogin.addEventListener("click", (e) => {
-        MODAL.wrapper.style.display = "flex";
+        MODAL.title.innerText = 'Авторизация'
+        loginContent()
+        openModal()
     });
 
     BUTTONS.settings.addEventListener("click", (e) => {
-        MODAL.wrapper.style.display = "flex";
+        MODAL.title.innerText = 'Настройки'
+        settingsContent()
+        openModal()
     });
 
     FORM.form.addEventListener("submit", (e) => {
         let inputValue = e.target.text.value;
-        state.unshift({
-            author: "Я",
-            content: inputValue,
-            date: "",
-            status: "SENDED",
-        });
-        e.target.text.value = "";
-        render();
+        if(inputValue){
+            storage.state.unshift({
+                author: storage.currentName,
+                content: inputValue,
+                date: "",
+                status: "SENDED",
+            });
+            e.target.text.value = "";
+            render();
+        }
     });
 })();
 
 function render() {
     MESSAGE.container.innerHTML = "";
 
-    state.reduceRight((_, i) => {
+    storage.state.reduceRight((_, i) => {
         const message = document.createElement("div");
         const messageTemplate = MESSAGE.template.content.cloneNode(true);
 
@@ -52,7 +70,7 @@ function render() {
         message.querySelector(".message__author").innerText = i.author;
         message.querySelector(".message__text").innerText = i.content;
 
-        if (i.author === "Я") {
+        if (i.author === storage.currentName) {
             message.classList.add("message_to");
         } else {
             message.classList.add("message_from");

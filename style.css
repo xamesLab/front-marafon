@@ -41,7 +41,7 @@ main {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal__content {
+.modal__wrapper {
     width: 273px;
     height: 319px;
     padding: 16px 14px;
@@ -52,6 +52,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 16px;
 }
 
 .modal__close {
@@ -91,7 +92,7 @@ main {
     flex: 1 1 auto;
     margin-bottom: 8px;
     padding: 0 8px;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .message-field::-webkit-scrollbar {
@@ -150,18 +151,42 @@ main {
     background-color: #e5e5e5;
 }
 
-.input {
+.input, .input-settings {
     display: flex;
     width: 100%;
 }
 
-.input input {
+.input-settings{
+    margin-top: 8px;
+}
+
+.input input, .input-settings input, .input__email, .input__code, .input__btn {
     padding: 6px 8px;
     outline: none;
     border: 1px solid #777;
 }
 
-input:first-child {
+input:first-child, .input-settings:first-child {
     flex: 1 1 auto;
     margin-right: 8px;
+}
+
+.input__email, .input__code {
+    width: 100%;
+    margin-bottom: 7px;
+}
+
+.input__btn {
+    padding: 7px;
+    background-color: white;
+}
+
+.input-skip {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    font-size: 0.9rem;
+    font-style: italic;
+    text-align: right;
+    margin-top: 20px;
+    cursor: pointer;
 }
