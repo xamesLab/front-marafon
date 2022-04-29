@@ -83,37 +83,70 @@ main {
 }
 
 .message-field {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-end; */
     width: 100%;
     border: 1px solid #777;
     flex: 1 1 auto;
     margin-bottom: 8px;
     padding: 0 8px;
+    overflow-y: auto;
+}
+
+.message-field::-webkit-scrollbar {
+    /*display: none; /* for Chrome, Safari, and Opera */
+    width: 5px;
+}
+
+.message-field::-webkit-scrollbar-track {
+    background: rgba(119, 119, 119, 0.25);
+}
+
+.message-field::-webkit-scrollbar-thumb {
+    background: rgba(119, 119, 119, 0.4);
+    border-radius: 50px;
+    border: 1px solid rgb(194, 194, 194);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100%;
 }
 
 .message {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.message:last-child {
+    margin-bottom: 8px;
+}
+
+.message > div {
     border: 1px solid #777;
     padding: 8px 8px 28px 8px;
-    margin-bottom: 8px;
     display: flex;
     width: fit-content;
 }
 
 .message_to {
-    float: right;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .message_from {
-    float: left;
+    display: flex;
+    justify-content: flex-start;
 }
 
-.message_s {
+.message_s > div {
     background-color: #f6f6f6;
 }
 
-.message_d {
+.message_d > div {
     background-color: #e5e5e5;
 }
 

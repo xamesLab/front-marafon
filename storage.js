@@ -1,26 +1,26 @@
 export default [
     {
-        author:"Я",
-        content:"Досвидания!",
+        author: "Я",
+        content: "Досвидания dfdfdfdf!",
         date: "",
-        status:"SENDED"
+        status: "SENDED",
     },
     {
-        author:"Собеседник",
-        content:"Второе сообщение, слишком длинное, чтобы поместиться в одной строке.",
+        author: "Собеседник",
+        content: "Второе сообщение, слишком длинное, чтобы поместиться в одной строке.",
         date: "",
-        status:"DELIVERED"
+        status: "DELIVERED",
     },
     {
-        author:"Собеседник",
-        content:"Добрый день!",
+        author: "Собеседник",
+        content: "Добрый день!",
         date: "",
-        status:"DELIVERED"
+        status: "DELIVERED",
     },
     {
-        author:"Я",
-        content:"Добрый день!",
+        author: "Я",
+        content: "Добрый день!",
         date: "",
-        status:"DELIVERED"
+        status: "DELIVERED",
     },
-]
+];
