@@ -1,9 +1,10 @@
 import { format } from "date-fns";
 
 export function initTimer() {
-    const date = format(new Date(), "PPP");
-
-    const timerContent = document.querySelector(".timer>span");
-
-    timerContent.innerText = date;
+        setTimeout(() => {
+            const date = format(new Date(), 'HH:mm:ss');
+            const timerContent = document.querySelector(".timer>span");
+            timerContent.innerText = date;
+            initTimer()
+        }, 1000);
 }
