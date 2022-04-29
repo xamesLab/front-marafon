@@ -13,6 +13,7 @@ body {
 }
 
 main {
+    position: relative;
     width: 320px;
     height: 533px;
     border: 1px solid #777;
@@ -57,6 +58,17 @@ main {
     cursor: pointer;
 }
 
+.timer {
+    position: absolute;
+    top: -35px;
+    right: 7px;
+    display: flex;
+    padding: 0.2rem 1rem;
+    border: 1px solid #777;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 .header {
     display: flex;
     align-items: center;
@@ -98,11 +110,11 @@ main {
 }
 
 .message_s {
-    background-color: #F6F6F6;
+    background-color: #f6f6f6;
 }
 
 .message_d {
-    background-color: #E5E5E5;
+    background-color: #e5e5e5;
 }
 
 .input {
