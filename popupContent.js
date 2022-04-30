@@ -1,4 +1,6 @@
 import {MODAL} from "./view.js"
+import auth from './service/authService.js'
+import utils from './utils.js'
 
 export function settingsContent (){
     MODAL.content.style.marginTop = 0
@@ -68,9 +70,16 @@ export function loginContent (){
         confirmContent()
     })
 
-    form.addEventListener('submit', (e)=>{
+    form.addEventListener('submit', async (e)=>{
         e.preventDefault()
-       //confirmContent()
+        const imputValue = form.email.value
+        const result = await auth.register(imputValue)
+
+        if(result.ok){
+            form.email.value = ''
+            confirmContent()
+        }
+        
     })
 }
 
@@ -104,6 +113,8 @@ export function confirmContent (){
 
     form.addEventListener('submit', (e)=>{
         e.preventDefault()
-        console.log('test')
+        const imputValue = form.code.value
+        document.cookie = `token=${imputValue}`
+        utils.removeModal()
     })
 }

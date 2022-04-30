@@ -1,13 +1,8 @@
 import { MODAL, BUTTONS, MESSAGE, FORM } from "./view.js";
 import storage from "./storage.js";
 import { initTimer } from "./timer.js";
-import {settingsContent, loginContent, confirmContent} from "./popupContent.js"
-
-const removeModal = ()=>{
-    MODAL.modal.style.display = "none";
-    MODAL.title.innerText = ''
-    MODAL.content.innerHTML = ''
-}
+import {settingsContent, loginContent} from "./popupContent.js"
+import utils from './utils.js'
 
 const openModal = ()=>{
     MODAL.modal.style.display = "flex";
@@ -15,11 +10,11 @@ const openModal = ()=>{
 
 (function init() {
     initTimer();
-    removeModal()
+    utils.removeModal()
 
     MODAL.modal.addEventListener("click", (e) => {
         e.stopPropagation();
-        removeModal()
+        utils.removeModal()
     });
 
     MODAL.wrapper.addEventListener("click", (e) => {
@@ -27,7 +22,7 @@ const openModal = ()=>{
     });
 
     BUTTONS.closeModal.addEventListener("click", (e) => {
-        removeModal()
+        utils.removeModal()
     });
 
     BUTTONS.loginUnlogin.addEventListener("click", (e) => {
