@@ -4,10 +4,6 @@ import { initTimer } from "./timer.js";
 import {settingsContent, loginContent} from "./popupContent.js"
 import utils from './utils.js'
 
-const openModal = ()=>{
-    MODAL.modal.style.display = "flex";
-}
-
 (function init() {
     initTimer();
     utils.removeModal()
@@ -28,20 +24,20 @@ const openModal = ()=>{
     BUTTONS.loginUnlogin.addEventListener("click", (e) => {
         MODAL.title.innerText = 'Авторизация'
         loginContent()
-        openModal()
+        utils.openModal()
     });
 
     BUTTONS.settings.addEventListener("click", (e) => {
         MODAL.title.innerText = 'Настройки'
         settingsContent()
-        openModal()
+        utils.openModal()
     });
 
     FORM.form.addEventListener("submit", (e) => {
         let inputValue = e.target.text.value;
         if(inputValue){
             storage.state.unshift({
-                author: storage.currentName,
+                author: '',
                 content: inputValue,
                 date: "",
                 status: "SENDED",
@@ -52,7 +48,7 @@ const openModal = ()=>{
     });
 })();
 
-function render() {
+export function render() {
     MESSAGE.container.innerHTML = "";
 
     storage.state.reduceRight((_, i) => {
@@ -62,10 +58,10 @@ function render() {
         message.classList.add("message");
         message.append(messageTemplate);
 
-        message.querySelector(".message__author").innerText = i.author;
+        message.querySelector(".message__author").innerText = i.author||storage.currentName;
         message.querySelector(".message__text").innerText = i.content;
 
-        if (i.author === storage.currentName) {
+        if (!i.author||i.author === storage.currentName) {
             message.classList.add("message_to");
         } else {
             message.classList.add("message_from");

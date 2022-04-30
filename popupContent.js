@@ -1,8 +1,11 @@
 import {MODAL} from "./view.js"
-import auth from './service/authService.js'
+import user from './service/userService.js'
 import utils from './utils.js'
+import storage from './storage.js'
+import {render} from './index.js'
 
 export function settingsContent (){
+    MODAL.content.innerHTML = ''
     MODAL.content.style.marginTop = 0
     const formLabel = document.createElement('label')
     formLabel.setAttribute('for', 'name')
@@ -28,13 +31,22 @@ export function settingsContent (){
     form.append(inputSubmit)
     MODAL.content.append(form)
 
-    form.addEventListener('submit', (e)=>{
+    form.addEventListener('submit', async (e)=>{
         e.preventDefault()
-        console.log('test')
+        const imputValue = form.name.value
+        const result = await user.setName(imputValue)
+        
+        if(result.ok){
+            form.name.value = ''
+            utils.removeModal()
+            storage.currentName = imputValue
+            render()
+        }
     })
 }
 
 export function loginContent (){
+    MODAL.content.innerHTML = ''
     MODAL.content.style.marginTop = '70px'
 
     const formLabel = document.createElement('label')
@@ -73,7 +85,7 @@ export function loginContent (){
     form.addEventListener('submit', async (e)=>{
         e.preventDefault()
         const imputValue = form.email.value
-        const result = await auth.register(imputValue)
+        const result = await user.register(imputValue)
 
         if(result.ok){
             form.email.value = ''

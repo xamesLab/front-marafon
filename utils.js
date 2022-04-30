@@ -18,6 +18,10 @@ const createHeader = ()=>{
     }
 }
 
+const openModal = ()=>{
+    MODAL.modal.style.display = "flex";
+}
+
 const removeModal = ()=>{
     MODAL.modal.style.display = "none";
     MODAL.title.innerText = ''
@@ -25,5 +29,5 @@ const removeModal = ()=>{
 }
 
 export default {
-    getToken, createHeader, removeModal
+    getToken, createHeader, removeModal, openModal
 }

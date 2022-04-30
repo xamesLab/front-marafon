@@ -2,7 +2,7 @@ export default {
     currentName: "Я",
     state: [
         {
-            author: "Я",
+            author: "",
             content: "Досвидания dfdfdfdf!",
             date: "",
             status: "SENDED",
@@ -20,7 +20,7 @@ export default {
             status: "DELIVERED",
         },
         {
-            author: "Я",
+            author: "",
             content: "Добрый день!",
             date: "",
             status: "DELIVERED",
