@@ -1,8 +1,9 @@
-import { MODAL, BUTTONS, MESSAGE, FORM } from "./view.js";
+import { MODAL, BUTTONS, MESSAGE, FORM, MAIN } from "./view.js";
 import storage from "./storage.js";
 import { initTimer } from "./timer.js";
 import {settingsContent, loginContent} from "./popupContent.js"
 import utils from './utils.js'
+import config from "./config.js";
 
 (function init() {
     initTimer();
@@ -49,6 +50,7 @@ import utils from './utils.js'
 })();
 
 export function render() {
+    MAIN.name.innerText = storage.currentName
     MESSAGE.container.innerHTML = "";
 
     storage.state.reduceRight((_, i) => {

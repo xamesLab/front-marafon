@@ -23,4 +23,9 @@ const FORM = {
     sendMessage: document.querySelector(".input__send"),
 };
 
-export { MODAL, BUTTONS, MESSAGE, FORM };
+const MAIN = {
+    name: document.querySelector('.current-name')
+}
+
+
+export { MODAL, MAIN, BUTTONS, MESSAGE, FORM };

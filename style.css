@@ -59,7 +59,7 @@ main {
     cursor: pointer;
 }
 
-.timer {
+.timer, .current-name {
     position: absolute;
     top: -35px;
     right: 7px;
@@ -68,6 +68,11 @@ main {
     border: 1px solid #777;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.5);
+}
+
+.current-name {
+    left: 7px;
+    right: unset;
 }
 
 .header {
