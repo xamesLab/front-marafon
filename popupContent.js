@@ -2,7 +2,7 @@ import {MODAL} from "./view.js"
 import user from './service/userService.js'
 import utils from './utils.js'
 import storage from './storage.js'
-import {render} from './index.js'
+import {render} from './render.js'
 
 export function settingsContent (){
     MODAL.content.innerHTML = ''

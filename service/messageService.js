@@ -1,5 +1,6 @@
 import config from '../config.js'
 import utils from '../utils.js'
+import storage from '../storage.js'
 
 const HEADER = utils.createHeader()
 
@@ -15,6 +16,15 @@ class Message {
                 error:e
             }
         }   
+    }
+
+    async sendMessage (text){
+        storage.state.unshift({
+            author: '',
+            content: text,
+            date: "",
+            status: "SENDED",
+        });
     }
 }
 
