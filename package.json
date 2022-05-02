@@ -5,6 +5,9 @@
     ],
     "version": "1.0.0",
     "description": "chat for front marafon",
+    "engines": {
+        "node": "14.16.0"
+    },
     "main": "index.js",
     "scripts": {
         "start": "parcel index.html",
@@ -13,7 +16,8 @@
     "author": "xamesLab",
     "license": "ISC",
     "dependencies": {
-        "date-fns": "^2.28.0"
+        "date-fns": "^2.28.0",
+        "parsel": "^0.3.0"
     },
     "devDependencies": {
         "cssnano": "^5.1.7",
