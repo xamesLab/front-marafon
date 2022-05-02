@@ -1,5 +1,8 @@
 {
     "name": "chat",
+    "browserslist": [
+        "last 1 Chrome versions"
+    ],
     "version": "1.0.0",
     "description": "chat for front marafon",
     "main": "index.js",

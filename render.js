@@ -1,8 +1,9 @@
-import {  MESSAGE,  MAIN } from "./view.js";
+import { MESSAGE, MAIN } from "./view.js";
 import storage from "./storage.js";
 
-export const render = ()=>{
-    MAIN.name.innerText = storage.currentName
+export const render = () => {
+    console.log("render");
+    MAIN.name.innerText = storage.currentName;
     MESSAGE.container.innerHTML = "";
 
     storage.state.reduceRight((_, i) => {
@@ -12,10 +13,10 @@ export const render = ()=>{
         message.classList.add("message");
         message.append(messageTemplate);
 
-        message.querySelector(".message__author").innerText = i.author||storage.currentName;
+        message.querySelector(".message__author").innerText = i.author || storage.currentName;
         message.querySelector(".message__text").innerText = i.content;
 
-        if (!i.author||i.author === storage.currentName) {
+        if (!i.author || i.author === storage.currentName) {
             message.classList.add("message_to");
         } else {
             message.classList.add("message_from");
@@ -30,4 +31,4 @@ export const render = ()=>{
         MESSAGE.container.append(message);
         MESSAGE.scrollBox.scrollTop = MESSAGE.scrollBox.scrollHeight;
     }, 0);
-}
+};
