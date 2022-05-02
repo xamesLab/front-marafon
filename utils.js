@@ -1,4 +1,4 @@
-import { MODAL } from "./view.js";
+import { MODAL, MAIN } from "./view.js";
 
 const getToken = () => {
     const cookie = document.cookie;
@@ -12,7 +12,6 @@ const getToken = () => {
 };
 
 const createHeader = () => {
-    console.log(getToken());
     return {
         "Content-Type": "application/json;charset=utf-8",
         Authorization: getToken() ? `Bearer ${getToken()}` : "",
@@ -29,9 +28,18 @@ const removeModal = () => {
     MODAL.content.innerHTML = "";
 };
 
+const toogleLoader = (stateLoader) => {
+    if (stateLoader) {
+        MAIN.loader.style.display = "block";
+    } else {
+        MAIN.loader.style.display = "none";
+    }
+};
+
 export default {
     getToken,
     createHeader,
     removeModal,
     openModal,
+    toogleLoader,
 };

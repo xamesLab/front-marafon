@@ -13,6 +13,7 @@ import storage from "./storage.js";
 
     message.setMessage().then((r) => {
         render();
+        utils.toogleLoader(false);
     });
 
     MODAL.modal.addEventListener("click", (e) => {
@@ -50,5 +51,3 @@ import storage from "./storage.js";
         }
     });
 })();
-
-//render();
