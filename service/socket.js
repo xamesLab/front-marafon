@@ -9,6 +9,7 @@ socket.onopen = function (e) {
 };
 
 socket.onmessage = function (event) {
+    console.log(event.data);
     console.log(`[message] Данные получены с сервера: ${JSON.parse(event.data)}`);
     messageService.setMessage(JSON.parse(event.data)).then((_) => render());
 };
