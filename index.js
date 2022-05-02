@@ -5,6 +5,7 @@ import utils from "./utils.js";
 import { render } from "./render.js";
 import message from "./service/messageService.js";
 import storage from "./storage.js";
+import socket from "./service/socket.js";
 
 (function init() {
     initTimer();

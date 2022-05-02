@@ -1,6 +1,7 @@
 import config from "../config.js";
 import utils from "../utils.js";
 import storage from "../storage.js";
+import socket from "./socket.js";
 
 const HEADER = utils.createHeader();
 
@@ -19,7 +20,18 @@ class Message {
         }
     }
 
-    async setMessage() {
+    async setMessage(message) {
+        // set last message
+        if (message) {
+            console.log("message", message);
+            return storage.state.unshift({
+                author: message.user.name,
+                content: message.text,
+                data: "",
+                status: "DELIVERED",
+            });
+        }
+        // set last N message
         return this.getAll().then((response) => {
             const numberLastMessage = config.NUMBER_LAST_MESSAGE;
             const messageArr = response.messages;
@@ -27,6 +39,7 @@ class Message {
             lastMessage.forEach((i) => {
                 storage.state.unshift({
                     author: i.user.name,
+                    email: i.user.email,
                     content: i.text,
                     data: "",
                     status: "DELIVERED",
@@ -36,12 +49,12 @@ class Message {
     }
 
     async sendMessage(text) {
-        storage.state.unshift({
-            author: "",
-            content: text,
-            date: "",
-            status: "SENDED",
-        });
+        console.log(text);
+        socket.send(
+            JSON.stringify({
+                text: text,
+            })
+        );
     }
 }
 
