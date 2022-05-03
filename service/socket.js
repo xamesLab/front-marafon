@@ -10,7 +10,6 @@ socket.onopen = function (e) {
 
 socket.onmessage = function (event) {
     try {
-        console.log(`[message] Данные получены с сервера: ${event.data}`);
         messageService.setMessage(JSON.parse(event.data)).then((_) => render());
     } catch (error) {
         console.log("error json", error);
@@ -22,6 +21,9 @@ socket.onclose = function (event) {
         console.log(`[close] Соединение закрыто чисто, код=${event.code} причина=${event.reason}`);
     } else {
         console.log("[close] Соединение прервано");
+        setTimeout(() => {
+            //location.reload();
+        }, 5000);
     }
 };
 

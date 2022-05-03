@@ -1,4 +1,4 @@
-import { MESSAGE, MAIN } from "./view.js";
+import { MESSAGE } from "./view.js";
 import storage from "./storage.js";
 
 export const render = () => {

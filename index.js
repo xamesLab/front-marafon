@@ -23,9 +23,9 @@ user.checkAuth().then((r) => {
 
 initTimer();
 
-utils.removeModal();
-
 function init() {
+    utils.removeModal();
+
     MODAL.modal.addEventListener("click", (e) => {
         e.stopPropagation();
         utils.removeModal();
@@ -55,9 +55,14 @@ function init() {
     FORM.form.addEventListener("submit", async (e) => {
         let inputValue = e.target.text.value;
         if (inputValue) {
-            message.sendMessage(inputValue);
-            e.target.text.value = "";
-            render();
+            message.sendMessage(inputValue).then((isSended) => {
+                if (isSended) {
+                    e.target.text.value = "";
+                    render();
+                } else {
+                    e.target.text.value = "нужна авторизация";
+                }
+            });
         }
     });
 }

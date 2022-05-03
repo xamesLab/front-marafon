@@ -23,7 +23,6 @@ class Message {
     async setMessage(message) {
         // set last message
         if (message) {
-            console.log("message", message);
             return storage.state.unshift({
                 author: message.user.name,
                 content: message.text,
@@ -49,12 +48,16 @@ class Message {
     }
 
     async sendMessage(text) {
-        console.log(text);
-        socket.send(
-            JSON.stringify({
-                text: text,
-            })
-        );
+        if (storage.currentName) {
+            socket.send(
+                JSON.stringify({
+                    text: text,
+                })
+            );
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

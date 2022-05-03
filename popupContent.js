@@ -2,7 +2,6 @@ import { MODAL } from "./view.js";
 import user from "./service/userService.js";
 import utils from "./utils.js";
 import storage from "./storage.js";
-import { render } from "./render.js";
 
 export function settingsContent() {
     MODAL.content.innerHTML = "";
@@ -34,14 +33,18 @@ export function settingsContent() {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const imputValue = form.name.value;
+        if (!storage.currentName) {
+            formLabel.innerText = "нужна авторизация";
+            formLabel.style.color = "red";
+            formLabel.style.fontSize = "1.2rem";
+            return;
+        }
+
         const result = await user.setName(imputValue);
 
         if (result.ok) {
             form.name.value = "";
             location.reload();
-            //utils.removeModal()
-            // storage.currentName = imputValue
-            // render()
         }
     });
 }
@@ -127,6 +130,7 @@ export function confirmContent() {
         e.preventDefault();
         const imputValue = form.code.value;
         document.cookie = `token=${imputValue}`;
-        utils.removeModal();
+        //utils.removeModal();
+        location.reload();
     });
 }
