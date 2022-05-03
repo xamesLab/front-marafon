@@ -1,6 +1,6 @@
 export default {
-    currentName: "Я",
-    currentEmail: "oldenliss@gmail.com",
+    currentName: null,
+    currentEmail: null,
     state: [
         {
             author: "",

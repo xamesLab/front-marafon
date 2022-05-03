@@ -4,19 +4,28 @@ import { settingsContent, loginContent } from "./popupContent.js";
 import utils from "./utils.js";
 import { render } from "./render.js";
 import message from "./service/messageService.js";
+import user from "./service/userService.js";
 import storage from "./storage.js";
 import socket from "./service/socket.js";
 
-(function init() {
-    initTimer();
-    utils.removeModal();
-    MAIN.name.innerText = storage.currentName;
+message.setMessage().then((r) => {
+    render();
+    utils.toogleLoader(false);
+});
 
-    message.setMessage().then((r) => {
-        render();
-        utils.toogleLoader(false);
-    });
+user.checkAuth().then((r) => {
+    const stateApp = JSON.parse(localStorage.getItem("stateApp")) || {};
+    storage.currentName = stateApp.name;
+    storage.currentEmail = stateApp.email;
 
+    MAIN.name.innerText = storage.currentName || "не авторизован";
+});
+
+initTimer();
+
+utils.removeModal();
+
+function init() {
     MODAL.modal.addEventListener("click", (e) => {
         e.stopPropagation();
         utils.removeModal();
@@ -43,7 +52,7 @@ import socket from "./service/socket.js";
     });
 
     // send message
-    FORM.form.addEventListener("submit", (e) => {
+    FORM.form.addEventListener("submit", async (e) => {
         let inputValue = e.target.text.value;
         if (inputValue) {
             message.sendMessage(inputValue);
@@ -51,4 +60,6 @@ import socket from "./service/socket.js";
             render();
         }
     });
-})();
+}
+
+init();

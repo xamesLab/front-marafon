@@ -3,7 +3,7 @@ import storage from "./storage.js";
 
 export const render = () => {
     console.log("render");
-    MAIN.name.innerText = storage.currentName;
+
     MESSAGE.container.innerHTML = "";
 
     storage.state.reduceRight((_, i) => {
