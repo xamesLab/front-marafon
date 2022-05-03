@@ -15,11 +15,11 @@
     "author": "xamesLab",
     "license": "ISC",
     "dependencies": {
-        "date-fns": "^2.28.0"
+        "date-fns": "^2.28.0",
+        "parcel": "^2.5.0"
     },
     "devDependencies": {
         "cssnano": "^5.1.7",
-        "parcel": "^2.5.0",
         "postcss": "^8.4.12"
     }
 }
