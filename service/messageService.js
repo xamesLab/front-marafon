@@ -27,7 +27,7 @@ class Message {
             return storage.state.unshift({
                 author: message.user.name,
                 content: message.text,
-                data: "",
+                date: format(new Date(message.createdAt), "HH:mm"),
                 status: "DELIVERED",
             });
         }
