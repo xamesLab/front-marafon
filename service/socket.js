@@ -2,7 +2,7 @@ import utils from "../utils.js";
 import messageService from "./messageService.js";
 import { render } from "../render.js";
 
-const socket = new WebSocket(`ws://mighty-cove-31255.herokuapp.com/websockets?${utils.getToken()}`);
+const socket = new WebSocket(`wss://mighty-cove-31255.herokuapp.com/websockets?${utils.getToken()}`);
 
 socket.onopen = function (e) {
     console.log("connect...");
