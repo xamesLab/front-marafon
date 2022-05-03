@@ -2,6 +2,7 @@ import config from "../config.js";
 import utils from "../utils.js";
 import storage from "../storage.js";
 import socket from "./socket.js";
+import { format } from "date-fns";
 
 const HEADER = utils.createHeader();
 
@@ -32,7 +33,7 @@ class Message {
         }
         // set last N message
         return this.getAll().then((response) => {
-            const numberLastMessage = config.NUMBER_LAST_MESSAGE;
+            const numberLastMessage = storage.messageCount;
             const messageArr = response.messages;
             const lastMessage = messageArr.slice(messageArr.length - numberLastMessage, messageArr.length);
             lastMessage.forEach((i) => {
@@ -40,7 +41,7 @@ class Message {
                     author: i.user.name,
                     email: i.user.email,
                     content: i.text,
-                    data: "",
+                    date: format(new Date(i.createdAt), "HH:mm"),
                     status: "DELIVERED",
                 });
             });

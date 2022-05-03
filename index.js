@@ -1,4 +1,4 @@
-import { MODAL, BUTTONS, FORM, MAIN } from "./view.js";
+import { MODAL, BUTTONS, FORM, MAIN, MESSAGE } from "./view.js";
 import { initTimer } from "./timer.js";
 import { settingsContent, loginContent } from "./popupContent.js";
 import utils from "./utils.js";
@@ -25,6 +25,17 @@ initTimer();
 
 function init() {
     utils.removeModal();
+
+    MAIN.count.addEventListener("change", (e) => {
+        MESSAGE.container.innerHTML = "";
+        utils.toogleLoader(true);
+        storage.state = [];
+        storage.messageCount = e.target.value;
+        message.setMessage().then((r) => {
+            render();
+            utils.toogleLoader(false);
+        });
+    });
 
     MODAL.modal.addEventListener("click", (e) => {
         e.stopPropagation();

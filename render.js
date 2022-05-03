@@ -15,6 +15,7 @@ export const render = () => {
 
         message.querySelector(".message__author").innerText = i.author || storage.currentName;
         message.querySelector(".message__text").innerText = i.content;
+        message.querySelector(".message__date").innerText = i.date;
 
         if (!i.email || i.email === storage.currentEmail) {
             message.classList.add("message_to");

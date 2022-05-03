@@ -26,6 +26,7 @@ const FORM = {
 const MAIN = {
     name: document.querySelector(".current-name"),
     loader: document.querySelector(".loader"),
+    count: document.querySelector("#header__count"),
 };
 
 export { MODAL, MAIN, BUTTONS, MESSAGE, FORM };

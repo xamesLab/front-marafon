@@ -138,6 +138,10 @@ section:hover {
     border: 1px solid #777;
 }
 
+#header__count {
+    outline: none;
+}
+
 .message-field {
     /* display: flex;
     flex-direction: column;
@@ -182,10 +186,19 @@ section:hover {
 }
 
 .message > div {
+    min-width: 45%;
     border: 1px solid #777;
-    padding: 8px 8px 28px 8px;
+    padding: 8px 8px 8px 8px;
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     width: fit-content;
+}
+
+.message__date {
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-top: 5px;
 }
 
 .message_to {
@@ -196,6 +209,10 @@ section:hover {
 .message_from {
     display: flex;
     justify-content: flex-start;
+}
+
+.message_from > div {
+    align-items: flex-start;
 }
 
 .message_s > div {
