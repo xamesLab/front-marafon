@@ -128,9 +128,14 @@ export function confirmContent() {
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        const imputValue = form.code.value;
-        document.cookie = `token=${imputValue}`;
-        //utils.removeModal();
-        location.reload();
+        const inputValue = form.code.value;
+        if (typeof inputValue === "string" && inputValue.length > 0) {
+            document.cookie = `token=${inputValue}`;
+            //utils.removeModal();
+            location.reload();
+        } else {
+            formLabel.innerText = "неправильный код";
+            formLabel.style.color = "red";
+        }
     });
 }
