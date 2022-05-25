@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <main>
+        <div class="current-name">
+            <span>---</span>
+        </div>
+        <div class="timer">
+            <span>--:--:--</span>
+        </div>
+        <div class="loader">
+            <div class="loader__inner"></div>
+            <div>please wait</div>
+        </div>
+        <div class="header">
+            <div class="header__btn header__btn_set btn">
+                <span>Настройки</span>
+            </div>
+            <select name="" id="header__count">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select>
+            <div class="header__btn header__btn_gate btn">
+                <span>Войти</span>
+            </div>
+        </div>
+        <div class="message-field">
+            <div class="container">
+                <template class="message_tmpl">
+                    <div>
+                        <span><span class="message__author"></span>: <span class="message__text"></span></span>
+                        <span class="message__date"></span>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <form class="input" action="javascript:void(0);">
+            <input name="text" placeholder="сообщение..." type="text" class="input__text">
+            <input type="submit" value="->" class="input__send btn">
+        </form>
+    </main>
+    <section>
+        <a href="https://github.com/xamesLab/front-marafon/tree/chat" target="_blanck">GitHub: ветка "chat"</a>
+    </section>
+    <div class="modal">
+        <div class="modal__wrapper">
+            <div class="modal__header">
+                <span class="modal__title"></span>
+                <span class="modal__close">X</span>
+            </div>
+            <div class="modal__content">
+                <label for="email">Почта:</label>
+                <form class="input-email" action="javascript:void(0);">
+                    <input name="email" placeholder="email" type="text" class="input__email">
+                    <input type="submit" value="Получить код" class="input__btn btn">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./index.js"></script>
+</body>
+</html>
